@@ -8,23 +8,14 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import {
-  MuiThemeProvider,
-  createMuiTheme,
-  createTheme,
-} from "@material-ui/core/styles";
+import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import Hidden from "@material-ui/core/Hidden";
 import logo from "./img/logoiac.png";
 import bginsc from "./img/bginscription.png";
 import { lightBlue, teal } from "@material-ui/core/colors";
 import { withStyles } from "@material-ui/core/styles";
 
-import {
-  CardMedia,
-  FormControl,
-  FormGroup,
-  FormLabel,
-} from "@material-ui/core";
+import { CardMedia, FormControl, FormLabel } from "@material-ui/core";
 import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
 
@@ -87,29 +78,29 @@ const CustomField = withStyles({
   },
 })(TextField);
 
-const CustomSelect = withStyles({
-  root: {
-    "& label.Mui-focused": {
-      color: lightBlue[600],
-    },
-    "& .MuiInput-underline:after": {
-      borderBottomColor: lightBlue[600],
-    },
-    // "& .MuiOutlinedInput-root": {
-    //   "& fieldset": {
-    //     borderColor: lightBlue[400],
-    //   },
-    //   "&:hover fieldset": {
-    //     borderColor: lightBlue[800],
-    //   },
+// const CustomSelect = withStyles({
+//   root: {
+//     "& label.Mui-focused": {
+//       color: lightBlue[600],
+//     },
+// "& .MuiInput-underline:after": {
+//   borderBottomColor: lightBlue[600],
+// },
+// "& .MuiOutlinedInput-root": {
+//   "& fieldset": {
+//     borderColor: lightBlue[400],
+//   },
+//   "&:hover fieldset": {
+//     borderColor: lightBlue[800],
+//   },
 
-    //   "&.Mui-focused fieldset": {
-    //     borderColor: lightBlue[400],
-    //   },
-    // },
-    // "MuiSelect-root MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input"
-  },
-})(Select);
+//   "&.Mui-focused fieldset": {
+//     borderColor: lightBlue[400],
+//   },
+// },
+//     // "MuiSelect-root MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input"
+//   },
+// })(Select);
 
 const useStyles = makeStyles((theme) => ({
   container: {
