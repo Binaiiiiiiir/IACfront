@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -8,7 +8,7 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import { MuiThemeProvider, createTheme } from "@material-ui/core/styles";
 import Hidden from "@material-ui/core/Hidden";
 import logo from "./img/logoiac.png";
 import bginsc from "./img/bginscription.png";
@@ -19,7 +19,7 @@ import { CardMedia, FormControl, FormLabel } from "@material-ui/core";
 import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
 
-const background = createMuiTheme({
+const background = createTheme({
   overrides: {
     MuiCssBaseline: {
       "@global": {
@@ -152,22 +152,53 @@ const useStyles = makeStyles((theme) => ({
 
 const Inscription = () => {
   const classes = useStyles();
+  const [cities, setCities] = useState([]);
+  const [courses, setCourses] = useState([]);
   console.log(bginsc);
+
+  useEffect(() => {
+    fetch("https://iacapi.herokuapp.com/citys").then(async (res) => {
+      const data = await res.json();
+      setCities(data);
+    });
+    fetch("https://iacapi.herokuapp.com/courses").then(async (res) => {
+      const data = await res.json();
+      setCourses(data);
+    });
+  }, []);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const obj = {
+      name: `${formData.get("firstName")} ${formData.get("lastName")}`,
+      city: formData.get("city"),
+      email: formData.get("email"),
+      phoneNumber: formData.get("phone"),
+      cours: [...formData.getAll("langue"), ...formData.getAll("certificate")],
+    };
+    fetch("https://iacapi.herokuapp.com/inscription", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(obj),
+    });
+  };
   return (
     <MuiThemeProvider theme={background}>
       <Container component="main">
         <CssBaseline />
         <div className={classes.paper}>
-          <form className={classes.form} noValidate>
+          <form className={classes.form} onSubmit={handleSubmit} noValidate>
             <Grid container className={classes.container}>
               <Hidden only={["xs"]}>
                 <Grid className={classes.left} container sm={6}>
                   <Grid item xs={12} sm={12}></Grid>
-                  <Grid alignItems="center" item xs={12}>
+                  <Grid item xs={12}>
                     <CardMedia
                       component="img"
                       alt="Contemplative Reptile"
-                      zoom
                       image={logo}
                     />
                   </Grid>
@@ -216,11 +247,12 @@ const Inscription = () => {
                     <InputLabel htmlFor="outlined-age-native-simple">
                       City
                     </InputLabel>
-                    <Select native required fullWidth label="Ville">
+                    <Select name="city" native required fullWidth label="City">
                       <option aria-label="None" value="" />
-                      <option value={10}>Autres</option>
-                      <option value={10}>Rabat</option>
-                      <option value={20}>Tanger</option>
+                      {cities &&
+                        cities.map((city) => (
+                          <option value={city.id}>{city.name}</option>
+                        ))}
                     </Select>
                   </FormControl>
                 </Grid>
@@ -242,76 +274,77 @@ const Inscription = () => {
                     fullWidth
                     id="phone"
                     label="Phone number"
-                    name="Phone "
+                    name="phone"
                     autoComplete="Phone"
                   />
                 </Grid>
                 {/* sselect section */}
 
-                <Grid container xs={12}>
+                <Grid container>
                   <FormLabel component="legend" className={classes.legend}>
                     Langues
                   </FormLabel>
-                  <Grid xs={12} className={classes.checks} container>
-                    <FormControlLabel
-                      control={<BlueCheckbox name="French" />}
-                      label="French"
-                    />
-
-                    <FormControlLabel
-                      control={<BlueCheckbox name="German" />}
-                      label="German"
-                    />
-                    <FormControlLabel
-                      control={<BlueCheckbox name="Spanich" />}
-                      label="Spanish"
-                    />
-
-                    <FormControlLabel
-                      control={<BlueCheckbox name="English" />}
-                      label="English"
-                    />
-
-                    <FormControlLabel
-                      control={<BlueCheckbox name="Korean" />}
-                      label="Korean"
-                    />
+                  <Grid className={classes.checks} container>
+                    {courses.map((course) => {
+                      return course.coursType == "langue" ? (
+                        <FormControlLabel
+                          control={<BlueCheckbox name="langue" />}
+                          label={course.name}
+                          value={course.id}
+                        />
+                      ) : null;
+                    })}
                   </Grid>
 
                   <FormLabel className={classes.legend} component="legend">
                     Certificat
                   </FormLabel>
                   <Grid xs={12} className={classes.checks} container>
-                    <FormControlLabel
+                    {courses.map((course) => {
+                      return course.coursType == "certificate" ? (
+                        <FormControlLabel
+                          control={<TealCheckbox name="certificate" />}
+                          label={course.name}
+                          value={course.id}
+                        />
+                      ) : null;
+                    })}
+                    {/* <FormControlLabel
                       control={
                         <TealCheckbox
                           // color={theme.palette.primary}
-                          name="checkedB"
+                          name="certificate"
                         />
                       }
                       label="DELE"
+                      value="DELE"
                     />
                     <FormControlLabel
-                      control={<TealCheckbox name="checkedB" />}
+                      control={<TealCheckbox name="certificate" />}
                       label="DALF"
+                      value="DALF"
                     />
                     <FormControlLabel
-                      control={<TealCheckbox name="checkedA" />}
+                      control={<TealCheckbox name="certificate" />}
                       label="TEF"
+                      value="TEF"
                     />
 
                     <FormControlLabel
-                      control={<TealCheckbox name="checkedB" />}
+                      control={<TealCheckbox name="certificate" />}
                       label="TCF"
+                      value="TCF"
                     />
                     <FormControlLabel
-                      control={<TealCheckbox name="checkedA" />}
+                      control={<TealCheckbox name="certificate" />}
                       label="IELTS"
+                      value="IELTS"
                     />
                     <FormControlLabel
-                      control={<TealCheckbox name="checkedA" />}
+                      control={<TealCheckbox name="certificate" />}
                       label="TOEFL"
-                    />
+                      value="TOEFL"
+                    /> */}
                   </Grid>
                 </Grid>
                 <Grid item xs={12}>
@@ -320,6 +353,7 @@ const Inscription = () => {
                     variant="contained"
                     color="primary"
                     className={classes.submit}
+                    component="button"
                   >
                     Sign Up
                   </Button>
