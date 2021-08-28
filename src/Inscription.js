@@ -44,7 +44,7 @@ const BlueCheckbox = withStyles({
     },
   },
   checked: {},
-})((props) => <Checkbox color="default" {...props} />);
+})((props) => <Checkbox color='default' {...props} />);
 const TealCheckbox = withStyles({
   root: {
     color: teal[400],
@@ -53,7 +53,7 @@ const TealCheckbox = withStyles({
     },
   },
   checked: {},
-})((props) => <Checkbox color="default" {...props} />);
+})((props) => <Checkbox color='default' {...props} />);
 
 const CustomField = withStyles({
   root: {
@@ -155,7 +155,7 @@ const Inscription = () => {
   console.log(bginsc);
   return (
     <MuiThemeProvider theme={background}>
-      <Container component="main">
+      <Container component='main' maxWidth='md'>
         <CssBaseline />
         <div className={classes.paper}>
           <form className={classes.form} noValidate>
@@ -163,10 +163,10 @@ const Inscription = () => {
               <Hidden only={["xs"]}>
                 <Grid className={classes.left} container sm={6}>
                   <Grid item xs={12} sm={12}></Grid>
-                  <Grid alignItems="center" item xs={12}>
+                  <Grid alignItems='center' item xs={12}>
                     <CardMedia
-                      component="img"
-                      alt="Contemplative Reptile"
+                      component='img'
+                      alt='Contemplative Reptile'
                       zoom
                       image={logo}
                     />
@@ -176,48 +176,48 @@ const Inscription = () => {
               <Grid className={classes.right} container sm={6}>
                 <Grid item xs={12}>
                   <Typography
-                    color="textSecondary"
-                    align="center"
-                    component="h1"
-                    variant="h4"
+                    color='textSecondary'
+                    align='center'
+                    component='h1'
+                    variant='h4'
                   >
                     Inscription
                   </Typography>
                 </Grid>
                 <Grid item xs={12}>
                   <CustomField
-                    autoComplete="fname"
-                    name="firstName"
-                    variant="outlined"
+                    autoComplete='fname'
+                    name='firstName'
+                    variant='outlined'
                     required
-                    id="firstName"
-                    label="First Name"
+                    id='firstName'
+                    label='First Name'
                     autoFocus
                     fullWidth
                   />
                 </Grid>
                 <Grid item xs={12}>
                   <CustomField
-                    variant="outlined"
+                    variant='outlined'
                     required
-                    id="lastName"
-                    label="Last Name"
-                    name="lastName"
-                    autoComplete="lname"
+                    id='lastName'
+                    label='Last Name'
+                    name='lastName'
+                    autoComplete='lname'
                     fullWidth
                   />
                 </Grid>
                 <Grid item xs={12}>
                   <FormControl
                     fullWidth
-                    variant="outlined"
+                    variant='outlined'
                     className={classes.formControl}
                   >
-                    <InputLabel htmlFor="outlined-age-native-simple">
+                    <InputLabel htmlFor='outlined-age-native-simple'>
                       City
                     </InputLabel>
-                    <Select native required fullWidth label="Ville">
-                      <option aria-label="None" value="" />
+                    <Select native required fullWidth label='Ville'>
+                      <option aria-label='None' value='' />
                       <option value={10}>Autres</option>
                       <option value={10}>Rabat</option>
                       <option value={20}>Tanger</option>
@@ -226,59 +226,59 @@ const Inscription = () => {
                 </Grid>
                 <Grid item xs={12}>
                   <CustomField
-                    variant="outlined"
+                    variant='outlined'
                     required
                     fullWidth
-                    id="email"
-                    label="Email Address"
-                    name="email"
-                    autoComplete="email"
+                    id='email'
+                    label='Email Address'
+                    name='email'
+                    autoComplete='email'
                   />
                 </Grid>
                 <Grid item xs={12}>
                   <CustomField
-                    variant="outlined"
+                    variant='outlined'
                     required
                     fullWidth
-                    id="phone"
-                    label="Phone number"
-                    name="Phone "
-                    autoComplete="Phone"
+                    id='phone'
+                    label='Phone number'
+                    name='Phone '
+                    autoComplete='Phone'
                   />
                 </Grid>
                 {/* sselect section */}
 
                 <Grid container xs={12}>
-                  <FormLabel component="legend" className={classes.legend}>
+                  <FormLabel component='legend' className={classes.legend}>
                     Langues
                   </FormLabel>
                   <Grid xs={12} className={classes.checks} container>
                     <FormControlLabel
-                      control={<BlueCheckbox name="French" />}
-                      label="French"
+                      control={<BlueCheckbox name='French' />}
+                      label='French'
                     />
 
                     <FormControlLabel
-                      control={<BlueCheckbox name="German" />}
-                      label="German"
+                      control={<BlueCheckbox name='German' />}
+                      label='German'
                     />
                     <FormControlLabel
-                      control={<BlueCheckbox name="Spanich" />}
-                      label="Spanish"
-                    />
-
-                    <FormControlLabel
-                      control={<BlueCheckbox name="English" />}
-                      label="English"
+                      control={<BlueCheckbox name='Spanich' />}
+                      label='Spanish'
                     />
 
                     <FormControlLabel
-                      control={<BlueCheckbox name="Korean" />}
-                      label="Korean"
+                      control={<BlueCheckbox name='English' />}
+                      label='English'
+                    />
+
+                    <FormControlLabel
+                      control={<BlueCheckbox name='Korean' />}
+                      label='Korean'
                     />
                   </Grid>
 
-                  <FormLabel className={classes.legend} component="legend">
+                  <FormLabel className={classes.legend} component='legend'>
                     Certificat
                   </FormLabel>
                   <Grid xs={12} className={classes.checks} container>
@@ -286,39 +286,39 @@ const Inscription = () => {
                       control={
                         <TealCheckbox
                           // color={theme.palette.primary}
-                          name="checkedB"
+                          name='checkedB'
                         />
                       }
-                      label="DELE"
+                      label='DELE'
                     />
                     <FormControlLabel
-                      control={<TealCheckbox name="checkedB" />}
-                      label="DALF"
+                      control={<TealCheckbox name='checkedB' />}
+                      label='DALF'
                     />
                     <FormControlLabel
-                      control={<TealCheckbox name="checkedA" />}
-                      label="TEF"
+                      control={<TealCheckbox name='checkedA' />}
+                      label='TEF'
                     />
 
                     <FormControlLabel
-                      control={<TealCheckbox name="checkedB" />}
-                      label="TCF"
+                      control={<TealCheckbox name='checkedB' />}
+                      label='TCF'
                     />
                     <FormControlLabel
-                      control={<TealCheckbox name="checkedA" />}
-                      label="IELTS"
+                      control={<TealCheckbox name='checkedA' />}
+                      label='IELTS'
                     />
                     <FormControlLabel
-                      control={<TealCheckbox name="checkedA" />}
-                      label="TOEFL"
+                      control={<TealCheckbox name='checkedA' />}
+                      label='TOEFL'
                     />
                   </Grid>
                 </Grid>
                 <Grid item xs={12}>
                   <Button
-                    type="submit"
-                    variant="contained"
-                    color="primary"
+                    type='submit'
+                    variant='contained'
+                    color='primary'
                     className={classes.submit}
                   >
                     Sign Up
