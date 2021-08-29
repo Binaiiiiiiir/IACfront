@@ -257,7 +257,7 @@ const Inscription = () => {
 
   return (
     <MuiThemeProvider theme={background}>
-      <Container component="main">
+      <Container component="main" maxWidth="md">
         <CssBaseline />
         <div className={classes.paper}>
           <form className={classes.form} onSubmit={handleSubmit} noValidate>

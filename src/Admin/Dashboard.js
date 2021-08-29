@@ -7,7 +7,7 @@ import React from "react";
 const Dashboard = () => {
   return (
     <Admin dataProvider={restProvider("https://iacapi.herokuapp.com")}>
-      <Resource name="prospect" list={ListGuesser} />
+      <Resource name='prospect' list={ListGuesser} />
     </Admin>
   );
 };
