@@ -1,6 +1,6 @@
 import { Admin, ListGuesser, Resource } from "react-admin";
 import restProvider from "ra-data-simple-rest";
-import StudentList from "./components/StudentList";
+// import StudentList from "./components/StudentList";
 
 import React from "react";
 

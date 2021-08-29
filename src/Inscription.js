@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
+import { CircularProgress, Snackbar } from "@material-ui/core";
+import MuiAlert from "@material-ui/lab/Alert";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import Grid from "@material-ui/core/Grid";
@@ -14,10 +16,15 @@ import logo from "./img/logoiac.png";
 import bginsc from "./img/bginscription.png";
 import { lightBlue, teal } from "@material-ui/core/colors";
 import { withStyles } from "@material-ui/core/styles";
-
-import { CardMedia, FormControl, FormLabel } from "@material-ui/core";
+import {
+  CardMedia,
+  FormControl,
+  FormHelperText,
+  FormLabel,
+} from "@material-ui/core";
 import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
+import { Pattern } from "./pattern";
 
 const background = createTheme({
   overrides: {
@@ -147,6 +154,8 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
     background: "#0aaabc",
+    width: "25%",
+    height: "40px",
   },
 }));
 
@@ -154,7 +163,14 @@ const Inscription = () => {
   const classes = useStyles();
   const [cities, setCities] = useState([]);
   const [courses, setCourses] = useState([]);
-  console.log(bginsc);
+  const [fnError, setFnError] = useState(false);
+  const [lnError, setLnError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
+  const [phoneError, setPhoneError] = useState(false);
+  const [cityError, setCityError] = useState(false);
+  const [courseError, setCourseError] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [feedback, setFeedback] = useState({ open: false });
 
   useEffect(() => {
     fetch("https://iacapi.herokuapp.com/citys").then(async (res) => {
@@ -170,6 +186,39 @@ const Inscription = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
+    setFnError(false);
+    setLnError(false);
+    setEmailError(false);
+    setPhoneError(false);
+    setCityError(false);
+    setCourseError(false);
+    let x = 0;
+    if (!Pattern.name.test(formData.get("firstName"))) {
+      setFnError(true);
+      x++;
+    }
+    if (!Pattern.name.test(formData.get("lastName"))) {
+      setLnError(true);
+      x++;
+    }
+    if (!Pattern.email.test(formData.get("email"))) {
+      setEmailError(true);
+      x++;
+    }
+    if (!Pattern.phone.test(formData.get("phone"))) {
+      setPhoneError(true);
+      x++;
+    }
+    if (!formData.get("city")) {
+      setCityError(true);
+      x++;
+    }
+    if (
+      ![...formData.getAll("langue"), ...formData.getAll("certificate")].length
+    ) {
+      setCourseError(true);
+      x++;
+    }
     const obj = {
       name: `${formData.get("firstName")} ${formData.get("lastName")}`,
       city: formData.get("city"),
@@ -177,14 +226,35 @@ const Inscription = () => {
       phoneNumber: formData.get("phone"),
       cours: [...formData.getAll("langue"), ...formData.getAll("certificate")],
     };
-    fetch("https://iacapi.herokuapp.com/inscription", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(obj),
-    });
+
+    console.log(obj);
+    if (!x) {
+      setLoading(true);
+
+      fetch("https://iacapi.herokuapp.com/inscription", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(obj),
+      }).then(async (res) => {
+        setLoading(false);
+        const data = await res.json();
+        setFeedback({
+          open: true,
+          status: data.status === 400 ? "error" : "success",
+          message: data.message,
+        });
+      });
+    }
   };
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setFeedback({ open: false });
+  };
+
   return (
     <MuiThemeProvider theme={background}>
       <Container component="main">
@@ -212,7 +282,7 @@ const Inscription = () => {
                     component="h1"
                     variant="h4"
                   >
-                    Inscription
+                    Register
                   </Typography>
                 </Grid>
                 <Grid item xs={12}>
@@ -225,6 +295,8 @@ const Inscription = () => {
                     label="First Name"
                     autoFocus
                     fullWidth
+                    error={fnError}
+                    helperText={fnError && "Invalid first name"}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -236,6 +308,8 @@ const Inscription = () => {
                     name="lastName"
                     autoComplete="lname"
                     fullWidth
+                    error={lnError}
+                    helperText={lnError && "Invalid last name"}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -247,13 +321,27 @@ const Inscription = () => {
                     <InputLabel htmlFor="outlined-age-native-simple">
                       City
                     </InputLabel>
-                    <Select name="city" native required fullWidth label="City">
+                    <Select
+                      name="city"
+                      native
+                      inputProps={{
+                        id: "ERRRRRR",
+                      }}
+                      fullWidth
+                      label="City"
+                      error={cityError}
+                    >
                       <option aria-label="None" value="" />
                       {cities &&
                         cities.map((city) => (
-                          <option value={city.id}>{city.name}</option>
+                          <option key={city.id} value={city.id}>
+                            {city.name}
+                          </option>
                         ))}
                     </Select>
+                    {cityError && (
+                      <FormHelperText error>City is required!</FormHelperText>
+                    )}
                   </FormControl>
                 </Grid>
                 <Grid item xs={12}>
@@ -265,6 +353,8 @@ const Inscription = () => {
                     label="Email Address"
                     name="email"
                     autoComplete="email"
+                    error={emailError}
+                    helperText={emailError && "Invalid email"}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -276,18 +366,21 @@ const Inscription = () => {
                     label="Phone number"
                     name="phone"
                     autoComplete="Phone"
+                    error={phoneError}
+                    helperText={phoneError && "Invalid phone number"}
                   />
                 </Grid>
                 {/* sselect section */}
 
                 <Grid container>
                   <FormLabel component="legend" className={classes.legend}>
-                    Langues
+                    Language
                   </FormLabel>
                   <Grid className={classes.checks} container>
                     {courses.map((course) => {
-                      return course.coursType == "langue" ? (
+                      return course.coursType === "langue" ? (
                         <FormControlLabel
+                          key={course.id}
                           control={<BlueCheckbox name="langue" />}
                           label={course.name}
                           value={course.id}
@@ -297,56 +390,26 @@ const Inscription = () => {
                   </Grid>
 
                   <FormLabel className={classes.legend} component="legend">
-                    Certificat
+                    Certificate
                   </FormLabel>
                   <Grid xs={12} className={classes.checks} container>
                     {courses.map((course) => {
-                      return course.coursType == "certificate" ? (
+                      return course.coursType === "certificate" ? (
                         <FormControlLabel
+                          key={course.id}
                           control={<TealCheckbox name="certificate" />}
                           label={course.name}
                           value={course.id}
                         />
                       ) : null;
                     })}
-                    {/* <FormControlLabel
-                      control={
-                        <TealCheckbox
-                          // color={theme.palette.primary}
-                          name="certificate"
-                        />
-                      }
-                      label="DELE"
-                      value="DELE"
-                    />
-                    <FormControlLabel
-                      control={<TealCheckbox name="certificate" />}
-                      label="DALF"
-                      value="DALF"
-                    />
-                    <FormControlLabel
-                      control={<TealCheckbox name="certificate" />}
-                      label="TEF"
-                      value="TEF"
-                    />
-
-                    <FormControlLabel
-                      control={<TealCheckbox name="certificate" />}
-                      label="TCF"
-                      value="TCF"
-                    />
-                    <FormControlLabel
-                      control={<TealCheckbox name="certificate" />}
-                      label="IELTS"
-                      value="IELTS"
-                    />
-                    <FormControlLabel
-                      control={<TealCheckbox name="certificate" />}
-                      label="TOEFL"
-                      value="TOEFL"
-                    /> */}
                   </Grid>
                 </Grid>
+                {courseError && (
+                  <FormHelperText error>
+                    At least one certificate or language must be checked.
+                  </FormHelperText>
+                )}
                 <Grid item xs={12}>
                   <Button
                     type="submit"
@@ -354,14 +417,30 @@ const Inscription = () => {
                     color="primary"
                     className={classes.submit}
                     component="button"
+                    disabled={loading}
                   >
-                    Sign Up
+                    {loading && <CircularProgress size={20} />}
+                    {!loading && "Register"}
                   </Button>
                 </Grid>
               </Grid>
             </Grid>
           </form>
         </div>
+        <Snackbar
+          open={feedback.open}
+          autoHideDuration={6000}
+          onClose={handleClose}
+        >
+          <MuiAlert
+            elevation={6}
+            variant="filled"
+            onClose={handleClose}
+            severity={feedback.status}
+          >
+            {feedback.message}
+          </MuiAlert>
+        </Snackbar>
       </Container>
     </MuiThemeProvider>
   );
