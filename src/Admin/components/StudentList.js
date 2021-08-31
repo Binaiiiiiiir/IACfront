@@ -5,25 +5,33 @@ import {
   TextField,
   EditButton,
   DeleteButton,
-  ReferenceArrayField,
+  // ReferenceArrayField,
   SingleFieldList,
   ChipField,
+  ReferenceManyField,
+  // ArrayField,
+  // ReferenceField,
 } from "react-admin";
 
 const StudentList = (props) => {
   return (
     <List {...props}>
       <Datagrid>
-        <TextField label='cin' source='id' />
         <TextField source='name' />
         <TextField source='email' />
         <TextField source='phoneNumber' />
-        <TextField array source='cours' />
-        <ReferenceArrayField label='Tags' source='cours'>
+        <ReferenceManyField
+          label='Comments by'
+          reference='courses'
+          target='courses.id'
+        >
           <SingleFieldList>
-            <ChipField source='cours' />
+            <ChipField source='' />
           </SingleFieldList>
-        </ReferenceArrayField>
+        </ReferenceManyField>
+        <TextField source='statu' />
+        <TextField label='City' source='city.name' />
+        <TextField source='comment' />
         <EditButton />
         <DeleteButton />
       </Datagrid>

@@ -8,6 +8,8 @@ const Dashboard = () => {
   return (
     <Admin dataProvider={restProvider("https://iacapi.herokuapp.com")}>
       <Resource name='prospect' list={ListGuesser} />
+      <Resource name='courses' list={ListGuesser} />
+      <Resource name='citys' list={ListGuesser} />
     </Admin>
   );
 };
