@@ -245,6 +245,7 @@ const Inscription = () => {
           status: data.status === 400 ? "error" : "success",
           message: data.message,
         });
+        e.target.reset();
       });
     }
   };
