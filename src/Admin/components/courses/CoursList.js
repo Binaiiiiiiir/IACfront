@@ -1,5 +1,11 @@
 import React from "react";
-import { Datagrid, List, TextField } from "react-admin";
+import {
+  Datagrid,
+  DeleteButton,
+  EditButton,
+  List,
+  TextField,
+} from "react-admin";
 
 const CoursList = (props) => {
   return (
@@ -7,6 +13,8 @@ const CoursList = (props) => {
       <Datagrid>
         <TextField source='name' />
         <TextField source='coursType' label='Type' />
+        <EditButton basePath='/courses' />
+        <DeleteButton basePath='/courses' />
       </Datagrid>
     </List>
   );

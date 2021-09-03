@@ -9,8 +9,6 @@ const Home = () => {
       <p>Front end Home Page</p>
       <Link to='/inscription'>Click me</Link>
       <Link to='/dashboard'>dashboard here</Link>
-
-      <script src='binair.js' />
     </>
   );
 };
