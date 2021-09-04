@@ -15,15 +15,15 @@ import UpdateCours from "./components/courses/UpdateCours";
 const Dashboard = () => {
   return (
     <Admin dataProvider={restProvider("https://iacapi.herokuapp.com")}>
-      <Resource name='prospect' list={ProspectList} edit={ProspectEdit} />
+      <Resource name="prospect" list={ProspectList} edit={ProspectEdit} />
       <Resource
-        name='courses'
+        name="courses"
         list={CoursList}
         create={CoursCreate}
         edit={UpdateCours}
       />
       <Resource
-        name='cities'
+        name="cities"
         list={CityList}
         create={CityCreate}
         edit={UpdateCity}
