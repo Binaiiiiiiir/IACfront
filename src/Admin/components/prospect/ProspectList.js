@@ -1,28 +1,33 @@
 import {
   List,
-  ArrayField,
+  // ArrayField,
   BooleanField,
   ChipField,
   Datagrid,
   EmailField,
   SingleFieldList,
   TextField,
+  // ReferenceManyField,
+  ReferenceArrayField,
+  ReferenceField,
 } from "react-admin";
 
 const ProspectList = (props) => (
   <List {...props}>
-    <Datagrid rowClick='edit'>
-      <TextField source='name' />
-      <TextField source='city.name' />
-      <EmailField source='email' />
-      <TextField source='phoneNumber' />
-      <BooleanField source='statu' />
-      <ArrayField source='cours'>
+    <Datagrid rowClick="edit">
+      <TextField source="name" />
+      <ReferenceField label="City" source="city.id" reference="cities">
+        <TextField source="name" />
+      </ReferenceField>
+      <EmailField source="email" />
+      <TextField source="phoneNumber" />
+      <BooleanField source="statu" />
+      <ReferenceArrayField label="Courses" source="cours" reference="courses">
         <SingleFieldList>
-          <ChipField source='name' />
+          <ChipField source="name" />
         </SingleFieldList>
-      </ArrayField>
-      <TextField source='comment' />
+      </ReferenceArrayField>
+      <TextField source="comment" />
     </Datagrid>
   </List>
 );
