@@ -1,7 +1,5 @@
 import { Admin, Resource } from "react-admin";
 import restProvider from "ra-data-simple-rest";
-// import StudentList from "./components/StudentList";
-
 import React from "react";
 import ProspectList from "./components/prospect/ProspectList";
 import ProspectEdit from "./components/prospect/ProspectEdit";
@@ -11,22 +9,31 @@ import CityList from "./components/cities/CityList";
 import CityCreate from "./components/cities/CityCreate";
 import CoursCreate from "./components/courses/CoursCreate";
 import UpdateCours from "./components/courses/UpdateCours";
+import TeacherList from "./components/teacher/TeacherList";
+import CreateTeacher from "./components/teacher/CreateTeacher";
+import EditTeacher from "./components/teacher/EditTeacher";
 
 const Dashboard = () => {
   return (
     <Admin dataProvider={restProvider("https://iacapi.herokuapp.com")}>
-      <Resource name="prospect" list={ProspectList} edit={ProspectEdit} />
+      <Resource name='prospect' list={ProspectList} edit={ProspectEdit} />
       <Resource
-        name="courses"
+        name='courses'
         list={CoursList}
         create={CoursCreate}
         edit={UpdateCours}
       />
       <Resource
-        name="cities"
+        name='cities'
         list={CityList}
         create={CityCreate}
         edit={UpdateCity}
+      />
+      <Resource
+        name='teacher'
+        list={TeacherList}
+        create={CreateTeacher}
+        edit={EditTeacher}
       />
     </Admin>
   );
