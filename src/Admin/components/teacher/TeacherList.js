@@ -26,7 +26,7 @@ const TeacherList = (props) => {
         <EmailField source='email' />
         <ReferenceArrayField
           sortable={false}
-          label='Studying'
+          label='Teaching'
           source='cours'
           reference='courses'
         >
