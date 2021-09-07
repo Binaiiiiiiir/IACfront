@@ -6,7 +6,8 @@ const FormationEdit = (props) => {
     <Edit {...props}>
       <SimpleForm>
         <TextInput source='label' />
-        <NumberInput source='price' />
+        <NumberInput source='priceMounth' label='Price by month' />
+        <NumberInput source='priceFormation' label='Price by Formation' />
         <TextInput multiline source='description' />
       </SimpleForm>
     </Edit>

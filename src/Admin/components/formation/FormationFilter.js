@@ -1,4 +1,4 @@
-import { Filter, NumberInput, TextInput } from "ra-ui-materialui";
+import { Filter, TextInput } from "ra-ui-materialui";
 import React from "react";
 
 const FormationFilter = (props) => {
@@ -6,7 +6,6 @@ const FormationFilter = (props) => {
     <Filter {...props}>
       <TextInput label='Label' source='label' />
       <TextInput label='Description' source='description' />
-      <NumberInput label='Price' source='price' />
     </Filter>
   );
 };
