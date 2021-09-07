@@ -12,7 +12,6 @@ import UpdateCours from "./components/courses/UpdateCours";
 import TeacherList from "./components/teacher/TeacherList";
 import CreateTeacher from "./components/teacher/CreateTeacher";
 import EditTeacher from "./components/teacher/EditTeacher";
-import { EditGuesser } from "ra-ui-materialui";
 import FormationList from "./components/formation/FormationList";
 import FormationCreate from "./components/formation/FormationCreate";
 import FormationEdit from "./components/formation/FormationEdit";
