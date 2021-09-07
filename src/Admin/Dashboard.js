@@ -12,7 +12,10 @@ import UpdateCours from "./components/courses/UpdateCours";
 import TeacherList from "./components/teacher/TeacherList";
 import CreateTeacher from "./components/teacher/CreateTeacher";
 import EditTeacher from "./components/teacher/EditTeacher";
-
+import { EditGuesser } from "ra-ui-materialui";
+import FormationList from "./components/formation/FormationList";
+import FormationCreate from "./components/formation/FormationCreate";
+import FormationEdit from "./components/formation/FormationEdit";
 const Dashboard = () => {
   return (
     <Admin dataProvider={restProvider("https://iacapi.herokuapp.com")}>
@@ -34,6 +37,12 @@ const Dashboard = () => {
         list={TeacherList}
         create={CreateTeacher}
         edit={EditTeacher}
+      />
+      <Resource
+        name='formation'
+        list={FormationList}
+        create={FormationCreate}
+        edit={FormationEdit}
       />
     </Admin>
   );
