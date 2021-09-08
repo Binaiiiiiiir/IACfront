@@ -19,6 +19,12 @@ const useStyles = makeStyles((palette) => ({
 }));
 const ProspectList = (props) => {
   const classes = useStyles(props);
+  const handleRowStyle = (record) => {
+    console.log(record);
+    if (record.comment !== "nothing yet" && !record.statu)
+      return { backgroundColor: "#ffb74d" };
+    if (record.statu) return { backgroundColor: "#27fb6b" };
+  };
   return (
     <List
       className={classes.root}
@@ -26,7 +32,7 @@ const ProspectList = (props) => {
       sort={{ field: "RegisteredAt", order: "DESC" }}
       {...props}
     >
-      <Datagrid rowClick="edit">
+      <Datagrid rowClick="edit" rowStyle={handleRowStyle}>
         <TextField source="name" />
         <ReferenceField
           sortable={false}
