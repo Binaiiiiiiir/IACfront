@@ -15,33 +15,47 @@ import EditTeacher from "./components/teacher/EditTeacher";
 import FormationList from "./components/formation/FormationList";
 import FormationCreate from "./components/formation/FormationCreate";
 import FormationEdit from "./components/formation/FormationEdit";
+import { AiOutlineUsergroupAdd } from "react-icons/ai";
+import { RiBookletLine } from "react-icons/ri";
+import { HiOutlineLocationMarker } from "react-icons/hi";
+import { FaChalkboardTeacher } from "react-icons/fa";
+import { MdAttachMoney } from "react-icons/md";
 const Dashboard = () => {
   return (
     <Admin dataProvider={restProvider("https://iacapi.herokuapp.com")}>
-      <Resource name='prospect' list={ProspectList} edit={ProspectEdit} />
       <Resource
-        name='courses'
+        name="prospect"
+        list={ProspectList}
+        edit={ProspectEdit}
+        icon={AiOutlineUsergroupAdd}
+      />
+      <Resource
+        name="courses"
         list={CoursList}
         create={CoursCreate}
         edit={UpdateCours}
+        icon={RiBookletLine}
       />
       <Resource
-        name='cities'
+        name="cities"
         list={CityList}
         create={CityCreate}
         edit={UpdateCity}
+        icon={HiOutlineLocationMarker}
       />
       <Resource
-        name='teacher'
+        name="teacher"
         list={TeacherList}
         create={CreateTeacher}
         edit={EditTeacher}
+        icon={FaChalkboardTeacher}
       />
       <Resource
-        name='formation'
+        name="formation"
         list={FormationList}
         create={FormationCreate}
         edit={FormationEdit}
+        icon={MdAttachMoney}
       />
     </Admin>
   );

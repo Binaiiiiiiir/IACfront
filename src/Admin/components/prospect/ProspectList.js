@@ -1,7 +1,7 @@
 import ProspectFilter from "./ProspectFilter";
 import {
   List,
-  BooleanField,
+  // BooleanField,
   ChipField,
   Datagrid,
   EmailField,
@@ -56,7 +56,7 @@ const ProspectList = (props) => {
         </ReferenceArrayField>
         <DateField source="RegisteredAt" showTime />
         <TextField source="comment" />
-        <BooleanField source="statu" label="Status" />
+        {/* <BooleanField source="statu" label="Status" /> */}
       </Datagrid>
     </List>
   );
