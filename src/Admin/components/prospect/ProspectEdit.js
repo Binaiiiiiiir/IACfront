@@ -18,7 +18,7 @@ const ProspectEdit = (props) => {
         <ReferenceArrayInput source="cours" reference="courses">
           <SelectArrayInput optionText="name" />
         </ReferenceArrayInput>
-        <BooleanInput source="statu" />
+        <BooleanInput source="statu" label="Status" />
         <TextInput source="comment" />
         <TextInput source="name" />
         <ReferenceInput label="City" source="city.id" reference="cities">

@@ -1,43 +1,32 @@
-import ProspectFilter from "./ProspectFilter";
+import StudentFilter from "./StudentFilter";
 import {
-  List,
-  // BooleanField,
-  ChipField,
   Datagrid,
-  EmailField,
-  SingleFieldList,
   TextField,
-  DateField,
-  ReferenceArrayField,
+  EmailField,
+  List,
   ReferenceField,
-} from "react-admin";
-import { makeStyles } from "@material-ui/styles";
+  ReferenceArrayField,
+  SingleFieldList,
+  ChipField,
+  DateField,
+} from "ra-ui-materialui";
+import { makeStyles } from "@material-ui/core";
 const useStyles = makeStyles((palette) => ({
   root: {
     marginTop: "30px",
   },
 }));
-const ProspectList = (props) => {
+const StudentList = (props) => {
   const classes = useStyles(props);
-  const handleRowStyle = (record) => {
-    if (record.comment !== "nothing yet" && !record.statu)
-      return { backgroundColor: "#ffb74d" };
-    if (record.statu) return { backgroundColor: "#27fb6b" };
-  };
+
   return (
-    <List
-      className={classes.root}
-      filters={<ProspectFilter />}
-      filterDefaultValues={{ statu: false }}
-      sort={{ field: "RegisteredAt", order: "DESC" }}
-      {...props}
-    >
-      <Datagrid rowClick="edit" rowStyle={handleRowStyle}>
+    <List className={classes.root} filters={<StudentFilter />} {...props}>
+      <Datagrid rowClick="edit">
         <TextField source="name" />
         <ReferenceField
           sortable={false}
           label="City"
-          source="city.id"
+          source="city"
           reference="cities"
         >
           <TextField source="name" />
@@ -56,10 +45,9 @@ const ProspectList = (props) => {
         </ReferenceArrayField>
         <DateField source="RegisteredAt" showTime />
         <TextField source="comment" />
-        {/* <BooleanField source="statu" label="Status" /> */}
       </Datagrid>
     </List>
   );
 };
 
-export default ProspectList;
+export default StudentList;
