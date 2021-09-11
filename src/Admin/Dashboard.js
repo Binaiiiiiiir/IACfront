@@ -21,8 +21,10 @@ import { HiOutlineLocationMarker } from "react-icons/hi";
 import { FaChalkboardTeacher } from "react-icons/fa";
 import { MdAttachMoney } from "react-icons/md";
 import { IoSchoolOutline } from "react-icons/io5";
+import { BiBookReader } from "react-icons/bi";
 import StudentList from "./components/student/StudentList";
 import StudentEdit from "./components/student/StudentEdit";
+import ClassList from "./components/classe/ClassList";
 const Dashboard = () => {
   return (
     <Admin dataProvider={restProvider("https://iacapi.herokuapp.com")}>
@@ -37,6 +39,12 @@ const Dashboard = () => {
         list={StudentList}
         edit={StudentEdit}
         icon={IoSchoolOutline}
+      />
+      <Resource
+        name="classes"
+        list={ClassList}
+        // edit={EditGuesser}
+        icon={BiBookReader}
       />
       <Resource
         name="courses"
