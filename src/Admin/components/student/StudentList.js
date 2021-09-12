@@ -20,7 +20,12 @@ const StudentList = (props) => {
   const classes = useStyles(props);
 
   return (
-    <List className={classes.root} filters={<StudentFilter />} {...props}>
+    <List
+      bulkActionButtons={false}
+      className={classes.root}
+      filters={<StudentFilter />}
+      {...props}
+    >
       <Datagrid rowClick="edit">
         <TextField source="name" />
         <ReferenceField

@@ -26,6 +26,7 @@ const ProspectList = (props) => {
   };
   return (
     <List
+      bulkActionButtons={false}
       className={classes.root}
       filters={<ProspectFilter />}
       filterDefaultValues={{ statu: false }}

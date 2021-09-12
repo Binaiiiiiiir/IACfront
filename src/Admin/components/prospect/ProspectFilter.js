@@ -27,7 +27,7 @@ const ProspectFilter = (props) => (
     <ReferenceArrayInput source="cours" reference="courses">
       <SelectArrayInput optionText="name" />
     </ReferenceArrayInput>
-    <ReferenceInput source="city" reference="cities">
+    <ReferenceInput source="city" label="City" reference="cities">
       <SelectInput optionText="name" />
     </ReferenceInput>
     <DateInput source="RegisteredAt" />
