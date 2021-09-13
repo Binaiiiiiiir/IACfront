@@ -15,17 +15,17 @@ const ProspectEdit = (props) => {
   return (
     <Edit {...props}>
       <SimpleForm>
-        <ReferenceArrayInput source="cours" reference="courses">
-          <SelectArrayInput optionText="name" />
+        <ReferenceArrayInput source='cours' reference='courses'>
+          <SelectArrayInput optionText='name' />
         </ReferenceArrayInput>
-        <BooleanInput source="statu" label="Status" />
-        <TextInput source="comment" />
-        <TextInput source="name" />
-        <ReferenceInput label="City" source="city.id" reference="cities">
-          <SelectInput optionText="name" />
+        <BooleanInput source='statu' label='Status' />
+        <TextInput source='comment' />
+        <TextInput source='name' />
+        <ReferenceInput label='City' source='city' reference='cities'>
+          <SelectInput optionText='name' />
         </ReferenceInput>
-        <TextInput source="email" />
-        <TextInput source="phoneNumber" />
+        <TextInput source='email' />
+        <TextInput source='phoneNumber' />
       </SimpleForm>
     </Edit>
   );
