@@ -31,12 +31,12 @@ export default function Modal({ open, setModal }) {
           className={classes.title}
           id="alert-dialog-title"
         >
-          {"Thank you"}
+          {"Merci pour votre inscription"}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Your request has been successfully sent . You will be contacted as
-            soon as possible
+            Votre demande a été envoyée avec succès, vous serez contacté dans
+            les plus brefs délais
           </DialogContentText>
         </DialogContent>
         <DialogActions>
