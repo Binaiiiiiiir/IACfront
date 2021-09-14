@@ -25,6 +25,7 @@ import {
 import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
 import { Pattern } from "./pattern";
+import Modal from "./Modal";
 
 const background = createTheme({
   overrides: {
@@ -51,7 +52,7 @@ const BlueCheckbox = withStyles({
     },
   },
   checked: {},
-})((props) => <Checkbox color='default' {...props} />);
+})((props) => <Checkbox color="default" {...props} />);
 const TealCheckbox = withStyles({
   root: {
     color: teal[400],
@@ -60,7 +61,7 @@ const TealCheckbox = withStyles({
     },
   },
   checked: {},
-})((props) => <Checkbox color='default' {...props} />);
+})((props) => <Checkbox color="default" {...props} />);
 
 const CustomField = withStyles({
   root: {
@@ -161,6 +162,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Inscription = () => {
   const classes = useStyles();
+  const [modal, setModal] = useState(false);
   const [cities, setCities] = useState([]);
   const [courses, setCourses] = useState([]);
   const [fnError, setFnError] = useState(false);
@@ -245,6 +247,7 @@ const Inscription = () => {
           status: data.status === 400 ? "error" : "success",
           message: data.message,
         });
+        setModal(true);
         e.target.reset();
       });
     }
@@ -258,7 +261,7 @@ const Inscription = () => {
 
   return (
     <MuiThemeProvider theme={background}>
-      <Container component='main' maxWidth='md'>
+      <Container component="main" maxWidth="md">
         <CssBaseline />
         <div className={classes.paper}>
           <form className={classes.form} onSubmit={handleSubmit} noValidate>
@@ -268,8 +271,8 @@ const Inscription = () => {
                   <Grid item xs={12} sm={12}></Grid>
                   <Grid item xs={12}>
                     <CardMedia
-                      component='img'
-                      alt='Contemplative Reptile'
+                      component="img"
+                      alt="Contemplative Reptile"
                       image={logo}
                     />
                   </Grid>
@@ -278,22 +281,22 @@ const Inscription = () => {
               <Grid className={classes.right} container sm={6}>
                 <Grid item xs={12}>
                   <Typography
-                    color='textSecondary'
-                    align='center'
-                    component='h1'
-                    variant='h4'
+                    color="textSecondary"
+                    align="center"
+                    component="h1"
+                    variant="h4"
                   >
                     Inscription
                   </Typography>
                 </Grid>
                 <Grid item xs={12}>
                   <CustomField
-                    autoComplete='fname'
-                    name='firstName'
-                    variant='outlined'
+                    autoComplete="fname"
+                    name="firstName"
+                    variant="outlined"
                     required
-                    id='firstName'
-                    label='First Name'
+                    id="firstName"
+                    label="First Name"
                     autoFocus
                     fullWidth
                     error={fnError}
@@ -302,12 +305,12 @@ const Inscription = () => {
                 </Grid>
                 <Grid item xs={12}>
                   <CustomField
-                    variant='outlined'
+                    variant="outlined"
                     required
-                    id='lastName'
-                    label='Last Name'
-                    name='lastName'
-                    autoComplete='lname'
+                    id="lastName"
+                    label="Last Name"
+                    name="lastName"
+                    autoComplete="lname"
                     fullWidth
                     error={lnError}
                     helperText={lnError && "Invalid last name"}
@@ -316,23 +319,23 @@ const Inscription = () => {
                 <Grid item xs={12}>
                   <FormControl
                     fullWidth
-                    variant='outlined'
+                    variant="outlined"
                     className={classes.formControl}
                   >
-                    <InputLabel htmlFor='outlined-age-native-simple'>
+                    <InputLabel htmlFor="outlined-age-native-simple">
                       City
                     </InputLabel>
                     <Select
-                      name='city'
+                      name="city"
                       native
                       inputProps={{
                         id: "ERRRRRR",
                       }}
                       fullWidth
-                      label='City'
+                      label="City"
                       error={cityError}
                     >
-                      <option aria-label='None' value='' />
+                      <option aria-label="None" value="" />
                       {cities &&
                         cities.map((city) => (
                           <option key={city.id} value={city.id}>
@@ -347,26 +350,26 @@ const Inscription = () => {
                 </Grid>
                 <Grid item xs={12}>
                   <CustomField
-                    variant='outlined'
+                    variant="outlined"
                     required
                     fullWidth
-                    id='email'
-                    label='Email Address'
-                    name='email'
-                    autoComplete='email'
+                    id="email"
+                    label="Email Address"
+                    name="email"
+                    autoComplete="email"
                     error={emailError}
                     helperText={emailError && "Invalid email"}
                   />
                 </Grid>
                 <Grid item xs={12}>
                   <CustomField
-                    variant='outlined'
+                    variant="outlined"
                     required
                     fullWidth
-                    id='phone'
-                    label='Phone number'
-                    name='phone'
-                    autoComplete='Phone'
+                    id="phone"
+                    label="Phone number"
+                    name="phone"
+                    autoComplete="Phone"
                     error={phoneError}
                     helperText={phoneError && "Invalid phone number"}
                   />
@@ -374,7 +377,7 @@ const Inscription = () => {
                 {/* sselect section */}
 
                 <Grid container>
-                  <FormLabel component='legend' className={classes.legend}>
+                  <FormLabel component="legend" className={classes.legend}>
                     Language
                   </FormLabel>
                   <Grid className={classes.checks} container>
@@ -382,7 +385,7 @@ const Inscription = () => {
                       return course.coursType === "langue" ? (
                         <FormControlLabel
                           key={course.id}
-                          control={<BlueCheckbox name='langue' />}
+                          control={<BlueCheckbox name="langue" />}
                           label={course.name}
                           value={course.id}
                         />
@@ -390,7 +393,7 @@ const Inscription = () => {
                     })}
                   </Grid>
 
-                  <FormLabel className={classes.legend} component='legend'>
+                  <FormLabel className={classes.legend} component="legend">
                     Certificate
                   </FormLabel>
                   <Grid xs={12} className={classes.checks} container>
@@ -398,7 +401,7 @@ const Inscription = () => {
                       return course.coursType === "certificate" ? (
                         <FormControlLabel
                           key={course.id}
-                          control={<TealCheckbox name='certificate' />}
+                          control={<TealCheckbox name="certificate" />}
                           label={course.name}
                           value={course.id}
                         />
@@ -413,11 +416,11 @@ const Inscription = () => {
                 )}
                 <Grid item xs={12}>
                   <Button
-                    type='submit'
-                    variant='contained'
-                    color='primary'
+                    type="submit"
+                    variant="contained"
+                    color="primary"
                     className={classes.submit}
-                    component='button'
+                    component="button"
                     disabled={loading}
                   >
                     {loading && <CircularProgress size={20} />}
@@ -435,7 +438,7 @@ const Inscription = () => {
         >
           <MuiAlert
             elevation={6}
-            variant='filled'
+            variant="filled"
             onClose={handleClose}
             severity={feedback.status}
           >
@@ -443,6 +446,7 @@ const Inscription = () => {
           </MuiAlert>
         </Snackbar>
       </Container>
+      <Modal open={modal} setModal={setModal} />
     </MuiThemeProvider>
   );
 };
