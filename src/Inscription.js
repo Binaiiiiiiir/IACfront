@@ -247,7 +247,7 @@ const Inscription = () => {
           status: data.status === 400 ? "error" : "success",
           message: data.message,
         });
-        setModal(true);
+        setModal(data.status === 400 ? false : true);
         e.target.reset();
       });
     }

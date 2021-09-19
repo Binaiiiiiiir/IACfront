@@ -1,31 +1,37 @@
 import {
   SelectInput,
-  BooleanInput,
   Edit,
   ReferenceArrayInput,
   ReferenceInput,
   SelectArrayInput,
   SimpleForm,
+  RadioButtonGroupInput,
   TextInput,
 } from "react-admin";
 
 const ProspectEdit = (props) => {
-  console.log(props);
-
   return (
     <Edit {...props}>
       <SimpleForm>
-        <ReferenceArrayInput source='cours' reference='courses'>
-          <SelectArrayInput optionText='name' />
+        <ReferenceArrayInput source="cours" reference="courses">
+          <SelectArrayInput optionText="name" />
         </ReferenceArrayInput>
-        <BooleanInput source='statu' label='Status' />
-        <TextInput source='comment' />
-        <TextInput source='name' />
-        <ReferenceInput label='City' source='city' reference='cities'>
-          <SelectInput optionText='name' />
+        <RadioButtonGroupInput
+          source="status"
+          label="Status"
+          choices={[
+            { id: "pending", name: "Pending" },
+            { id: "treated", name: "Treated" },
+            { id: "student", name: "Student" },
+          ]}
+        />
+        <TextInput source="comment" />
+        <TextInput source="name" />
+        <ReferenceInput label="City" source="city" reference="cities">
+          <SelectInput optionText="name" />
         </ReferenceInput>
-        <TextInput source='email' />
-        <TextInput source='phoneNumber' />
+        <TextInput source="email" />
+        <TextInput source="phoneNumber" />
       </SimpleForm>
     </Edit>
   );

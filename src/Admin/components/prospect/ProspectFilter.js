@@ -16,10 +16,11 @@ const ProspectFilter = (props) => (
     <TextInput label="Comment" source="comment" />
     <SelectInput
       label="Status"
-      source="statu"
+      source="status"
       choices={[
-        { id: true, name: "True" },
-        { id: false, name: "False" },
+        { id: "pending", name: "Pending" },
+        { id: "treated", name: "Treated" },
+        { id: "student", name: "Student" },
       ]}
       allowEmpty
       alwaysOn
