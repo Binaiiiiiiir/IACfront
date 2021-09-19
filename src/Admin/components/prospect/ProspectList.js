@@ -12,52 +12,68 @@ import {
   ReferenceField,
 } from "react-admin";
 import { makeStyles } from "@material-ui/styles";
+
 const useStyles = makeStyles((palette) => ({
   root: {
     marginTop: "30px",
   },
+  pending: { backgroundColor: "#adb5bd" },
+  treated: { backgroundColor: "#ff8500" },
+  student: { backgroundColor: "#1bc44b" },
 }));
+
+const ColoredChipField = (props) => {
+  const classes = useStyles();
+
+  const setStatusColor = () => {
+    switch (props.record.status) {
+      case "treated":
+        return classes.treated;
+      case "student":
+        return classes.student;
+      default:
+        return classes.pending;
+    }
+  };
+  return <ChipField className={setStatusColor()} {...props} />;
+};
 const ProspectList = (props) => {
   const classes = useStyles(props);
-  const handleRowStyle = (record) => {
-    if (record.comment !== "nothing yet" && !record.statu)
-      return { backgroundColor: "#ffb74d" };
-    if (record.statu) return { backgroundColor: "#27fb6b" };
-  };
+
   return (
     <List
       bulkActionButtons={false}
       className={classes.root}
       filters={<ProspectFilter />}
-      filterDefaultValues={{ statu: false }}
+      filterDefaultValues={{ status: "pending" }}
       sort={{ field: "RegisteredAt", order: "DESC" }}
       {...props}
     >
-      <Datagrid rowClick='edit' rowStyle={handleRowStyle}>
-        <TextField source='name' />
+      <Datagrid rowClick="edit">
+        <TextField source="name" />
         <ReferenceField
           sortable={false}
-          label='City'
-          source='city'
-          reference='cities'
+          label="City"
+          source="city"
+          reference="cities"
         >
-          <TextField source='name' />
+          <TextField source="name" />
         </ReferenceField>
-        <EmailField source='email' />
-        <TextField source='phoneNumber' />
+        <EmailField source="email" />
+        <TextField source="phoneNumber" />
         <ReferenceArrayField
           sortable={false}
-          label='Courses'
-          source='cours'
-          reference='courses'
+          label="Courses"
+          source="cours"
+          reference="courses"
         >
           <SingleFieldList>
-            <ChipField source='name' />
+            <ChipField source="name" />
           </SingleFieldList>
         </ReferenceArrayField>
-        <DateField source='RegisteredAt' showTime />
-        <TextField source='comment' />
-        {/* <BooleanField source="statu" label="Status" /> */}
+        <DateField source="RegisteredAt" showTime />
+        <TextField source="comment" />
+        <ColoredChipField source="status" label="Status" />
       </Datagrid>
     </List>
   );

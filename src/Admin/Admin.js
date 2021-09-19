@@ -15,7 +15,7 @@ import EditTeacher from "./components/teacher/EditTeacher";
 import FormationList from "./components/formation/FormationList";
 import FormationCreate from "./components/formation/FormationCreate";
 import FormationEdit from "./components/formation/FormationEdit";
-import { AiOutlineUsergroupAdd } from "react-icons/ai";
+import { AiOutlineUsergroupAdd, AiOutlineUser } from "react-icons/ai";
 import { RiBookletLine } from "react-icons/ri";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { FaChalkboardTeacher } from "react-icons/fa";
@@ -25,6 +25,9 @@ import { BiBookReader } from "react-icons/bi";
 import StudentList from "./components/student/StudentList";
 import StudentEdit from "./components/student/StudentEdit";
 import ClassList from "./components/classe/ClassList";
+import UserList from "./components/user/UserList";
+import UserEdit from "./components/user/UserEdit";
+import UserCreate from "./components/user/UserCreate";
 const Dashboard = () => {
   return (
     <Admin dataProvider={restProvider("https://iacapi.herokuapp.com")}>
@@ -73,6 +76,13 @@ const Dashboard = () => {
         create={FormationCreate}
         edit={FormationEdit}
         icon={MdAttachMoney}
+      />
+      <Resource
+        name="user"
+        list={UserList}
+        create={UserCreate}
+        edit={UserEdit}
+        icon={AiOutlineUser}
       />
     </Admin>
   );
