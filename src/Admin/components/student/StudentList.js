@@ -26,30 +26,30 @@ const StudentList = (props) => {
       filters={<StudentFilter />}
       {...props}
     >
-      <Datagrid rowClick="edit">
-        <TextField source="name" />
+      <Datagrid rowClick='edit'>
+        <TextField source='name' />
         <ReferenceField
           sortable={false}
-          label="City"
-          source="city"
-          reference="cities"
+          label='City'
+          source='city'
+          reference='cities'
         >
-          <TextField source="name" />
+          <TextField source='name' />
         </ReferenceField>
-        <EmailField source="email" />
-        <TextField source="phoneNumber" />
+        <EmailField source='email' />
+        <TextField source='phoneNumber' />
         <ReferenceArrayField
           sortable={false}
-          label="Courses"
-          source="cours"
-          reference="courses"
+          label='Courses'
+          source='cours'
+          reference='courses'
         >
           <SingleFieldList>
-            <ChipField source="name" />
+            <ChipField source='name' />
           </SingleFieldList>
         </ReferenceArrayField>
-        <DateField source="RegisteredAt" showTime />
-        <TextField source="comment" />
+        <DateField source='RegisteredAt' showTime />
+        <TextField source='comment' />
       </Datagrid>
     </List>
   );

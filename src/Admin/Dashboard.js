@@ -29,46 +29,46 @@ const Dashboard = () => {
   return (
     <Admin dataProvider={restProvider("https://iacapi.herokuapp.com")}>
       <Resource
-        name="prospect"
+        name='prospect'
         list={ProspectList}
         edit={ProspectEdit}
         icon={AiOutlineUsergroupAdd}
       />
       <Resource
-        name="student"
+        name='student'
         list={StudentList}
         edit={StudentEdit}
         icon={IoSchoolOutline}
       />
       <Resource
-        name="classes"
+        name='classes'
         list={ClassList}
         // edit={EditGuesser}
         icon={BiBookReader}
       />
       <Resource
-        name="courses"
+        name='courses'
         list={CoursList}
         create={CoursCreate}
         edit={UpdateCours}
         icon={RiBookletLine}
       />
       <Resource
-        name="cities"
+        name='cities'
         list={CityList}
         create={CityCreate}
         edit={UpdateCity}
         icon={HiOutlineLocationMarker}
       />
       <Resource
-        name="teacher"
+        name='teacher'
         list={TeacherList}
         create={CreateTeacher}
         edit={EditTeacher}
         icon={FaChalkboardTeacher}
       />
       <Resource
-        name="formation"
+        name='formation'
         list={FormationList}
         create={FormationCreate}
         edit={FormationEdit}
