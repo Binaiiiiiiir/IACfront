@@ -175,11 +175,11 @@ const Inscription = () => {
   const [feedback, setFeedback] = useState({ open: false });
 
   useEffect(() => {
-    fetch("https://iacapi.herokuapp.com/cities").then(async (res) => {
+    fetch("https://iac-api.herokuapp.com/cities").then(async (res) => {
       const data = await res.json();
       setCities(data);
     });
-    fetch("https://iacapi.herokuapp.com/courses").then(async (res) => {
+    fetch("https://iac-api.herokuapp.com/courses").then(async (res) => {
       const data = await res.json();
       setCourses(data);
     });
@@ -233,7 +233,7 @@ const Inscription = () => {
     if (!x) {
       setLoading(true);
 
-      fetch("https://iacapi.herokuapp.com/inscription", {
+      fetch("https://iac-api.herokuapp.com/inscription", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
