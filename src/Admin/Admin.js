@@ -30,7 +30,7 @@ import UserEdit from "./components/user/UserEdit";
 import UserCreate from "./components/user/UserCreate";
 const Dashboard = () => {
   return (
-    <Admin dataProvider={restProvider("https://iacapi.herokuapp.com")}>
+    <Admin dataProvider={restProvider("https://iac-api.herokuapp.com")}>
       <Resource
         name='prospect'
         list={ProspectList}
