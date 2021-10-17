@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./css/binair.css";
 
 const Home = () => {
   return (
