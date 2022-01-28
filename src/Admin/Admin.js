@@ -28,9 +28,14 @@ import ClassList from "./components/classe/ClassList";
 import UserList from "./components/user/UserList";
 import UserEdit from "./components/user/UserEdit";
 import UserCreate from "./components/user/UserCreate";
+import { auth } from "./authProvider";
+
 const Dashboard = () => {
   return (
-    <Admin dataProvider={restProvider("https://iac-api.herokuapp.com")}>
+    <Admin
+      dataProvider={restProvider("https://iacback.herokuapp.com")}
+      authProvider={auth}
+    >
       <Resource
         name='prospect'
         list={ProspectList}
@@ -78,7 +83,7 @@ const Dashboard = () => {
         icon={MdAttachMoney}
       />
       <Resource
-        name="user"
+        name='user'
         list={UserList}
         create={UserCreate}
         edit={UserEdit}
