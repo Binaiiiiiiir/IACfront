@@ -9,7 +9,7 @@ import {
 export const auth = (type, params) => {
   if (type === AUTH_LOGIN) {
     const { username, password } = params;
-    const request = new Request("http://localhost:8080/user/auth", {
+    const request = new Request("https://iacback.herokuapp.com/user/auth", {
       method: "POST",
       body: JSON.stringify({ username, password }),
       headers: new Headers({ "Content-Type": "application/json" }),
