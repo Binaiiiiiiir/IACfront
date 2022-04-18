@@ -1,5 +1,4 @@
-import { Admin, Resource } from "react-admin";
-import restProvider from "ra-data-simple-rest";
+import { Admin, Resource } from "react-admin";import restProvider from "ra-data-simple-rest";
 import React from "react";
 import ProspectList from "./components/prospect/ProspectList";
 import ProspectEdit from "./components/prospect/ProspectEdit";
@@ -29,11 +28,14 @@ import UserList from "./components/user/UserList";
 import UserEdit from "./components/user/UserEdit";
 import UserCreate from "./components/user/UserCreate";
 import { auth } from "./authProvider";
+import { CashList } from "./components/cashs/cashList";
+import { CashEdit } from "./components/cashs/EditCash";
+import { CashCreate } from "./components/cashs/createCash";
 
 const Dashboard = () => {
   return (
     <Admin
-      dataProvider={restProvider("https://iacback.herokuapp.com")}
+      dataProvider={restProvider("http://localhost:8080")}
       authProvider={auth}
     >
       <Resource
@@ -88,6 +90,13 @@ const Dashboard = () => {
         create={UserCreate}
         edit={UserEdit}
         icon={AiOutlineUser}
+      />
+      <Resource
+        name='cashs'
+        list={CashList}
+        create={CashCreate}
+        edit={CashEdit}
+        // icon={AiOutlineUser}
       />
     </Admin>
   );

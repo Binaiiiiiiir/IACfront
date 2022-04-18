@@ -9,7 +9,7 @@ import {
 export const auth = (type, params) => {
   if (type === AUTH_LOGIN) {
     const { username, password } = params;
-    const request = new Request("https://iacback.herokuapp.com/user/auth", {
+    const request = new Request("http://localhost:8080/user/auth", {
       method: "POST",
       body: JSON.stringify({ username, password }),
       headers: new Headers({ "Content-Type": "application/json" }),
@@ -21,14 +21,17 @@ export const auth = (type, params) => {
         }
         return response.json();
       })
-      .then(({ token, role }) => {
+      .then(({ token, role, id }) => {
+        console.log({ token, role, id });
         localStorage.setItem("token", token);
         localStorage.setItem("role", role);
+        localStorage.setItem("userId", id);
       });
   }
   if (type === AUTH_LOGOUT) {
     localStorage.removeItem("token");
     localStorage.removeItem("role");
+    localStorage.removeItem("userId");
     return Promise.resolve();
   }
   if (type === AUTH_ERROR) {
