@@ -35,7 +35,7 @@ import { CashCreate } from "./components/cashs/createCash";
 const Dashboard = () => {
   return (
     <Admin
-      dataProvider={restProvider("http://localhost:8080")}
+      dataProvider={restProvider("https://iacback.herokuapp.com")}
       authProvider={auth}
     >
       <Resource
