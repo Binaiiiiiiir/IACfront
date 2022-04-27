@@ -21,6 +21,7 @@ export const CashCreate = (props) => {
   const [teachers, setteachers] = useState([]);
 
   useEffect(() => {
+    setAgent(localStorage.getItem("userId"));
     fetch("https://iacback.herokuapp.com/student").then(async (res) => {
       const data = await res.json();
       setstudents(data);
@@ -29,13 +30,12 @@ export const CashCreate = (props) => {
       const data = await res.json();
       setteachers(data);
     });
-    setAgent(localStorage.getItem("userId"));
   }, []);
-
+  console.log(agent);
   return (
     <Create redirect='list' {...props}>
       <SimpleForm>
-        <TextInput source='agent' defaultValue={agent} disabled hidden />
+        <TextInput source='agent' initialValue={agent} disabled />
         <RadioButtonGroupInput
           source='operationType'
           validate={validateOperation}
