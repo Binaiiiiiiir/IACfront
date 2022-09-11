@@ -14,6 +14,8 @@ import {
 
 const PrivacyPolicyComponent = () => {
   const [isOpen, setisOpen] = useState(false);
+  window.scrollTo(0, 0);
+
   const toggle = () => {
     setisOpen(!isOpen);
   };
